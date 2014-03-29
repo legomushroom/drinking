@@ -27,5 +27,4 @@ class Main
     bindArgs = Array::slice.call(arguments, 2)
     wrapper
 
-
 new Main
