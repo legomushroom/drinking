@@ -1,4 +1,13 @@
 
+
+<!-- 
+<text vertical-align="middle"  transform="translate(0,0)">
+	<textPath alignment-baseline="ideographic" orient-to-path="false" class="water-text" id="js-words-path" xlink:href="#words-path" startOffset="0">
+		youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute appeal kiss smile awesome yummy 
+	</textPath>
+</text>
+ -->
+
 <svg version="1.1" id="Layer_1"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="821.869px"
 	 height="1022.949px" viewBox="0 0 821.869 1022.949" enable-background="new 0 0 821.869 1022.949" xml:space="preserve">
@@ -1361,6 +1370,12 @@
 </g>
 
 
+
+<text vertical-align="middle"  transform="translate(0,0)">
+	<textPath alignment-baseline="ideographic" orient-to-path="false" class="water-text" id="js-words-path" xlink:href="#words-path" startOffset="0">
+		youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute youth love dance sex rock amuse cute appeal kiss smile awesome yummy fresh music taste youth love dance sex rock amuse cute appeal kiss smile awesome yummy 
+	</textPath>
+</text>
 
 <path id="words-path" fill="none" d="M473.734,572.033c17.337-7.188,46.476-7.663,57.779-8.487
 	c17.104-1.248,67.721,0.062,69.19,7.32c0.483,2.386-17.744,5.367-23.253,6.431c-13.557,2.614-28.76,0.729-42.521,1.416

@@ -11,7 +11,12 @@
     Main.prototype.vars = function() {
       this.animate = this.bind(this.animate, this);
       this.path = document.getElementById('js-words-path');
-      return this.text = this.path.textContent;
+      this.realPath = document.getElementById('words-path');
+      this.pathLength = this.realPath.getTotalLength();
+      this.easing = document.getElementById('js-custom-easing');
+      this.easingLength = this.easing.getTotalLength();
+      this.text = this.path.textContent;
+      return this.surpCnt = 4;
     };
 
     Main.prototype.animate = function() {
@@ -20,21 +25,29 @@
     };
 
     Main.prototype.launch = function() {
-      var it, offset;
+      var it, offset, step;
       it = this;
       offset = 0;
+      step = this.pathLength / this.surpCnt;
       return this.tween = new TWEEN.Tween({
         offset: 0,
         p: 0
       }).to({
-        offset: 400,
+        offset: -step,
         p: 1
-      }, 3000).easing(TWEEN.Easing.Sinusoidal.InOut).onUpdate(function() {
-        it.path.setAttribute('startOffset', this.offset + offset);
+      }, 5000).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+        var currOffset, es;
+        es = it.getEasing(this.p);
+        currOffset = 415 + (this.offset + offset);
+        it.path.setAttribute('startOffset', currOffset);
         if (this.p === 1) {
           return offset += this.offset;
         }
-      }).repeat(10).delay(1000).start();
+      }).repeat(this.surpCnt).delay(3000).start();
+    };
+
+    Main.prototype.getEasing = function(process) {
+      return this.easing.getPointAtLength(this.easingLength - (process * this.easingLength)).y / 100;
     };
 
     Main.prototype.bind = function(func, context) {

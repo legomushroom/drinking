@@ -6,7 +6,12 @@ class Main
   vars:->
     @animate = @bind @animate, @
     @path = document.getElementById 'js-words-path'
+    @realPath = document.getElementById 'words-path'
+    @pathLength = @realPath.getTotalLength()
+    @easing = document.getElementById 'js-custom-easing'
+    @easingLength = @easing.getTotalLength()
     @text = @path.textContent
+    @surpCnt = 4
   animate:->
     requestAnimationFrame(@animate)
     TWEEN.update()
@@ -14,14 +19,23 @@ class Main
   launch:->
     it = @
     offset = 0
+    step = @pathLength/@surpCnt
     @tween = new TWEEN.Tween({ offset: 0, p:0 })
-      .to({ offset: 400, p: 1 }, 3000)
-      .easing(TWEEN.Easing.Sinusoidal.InOut)
+      .to({ offset: -step, p: 1 }, 5000)
+      # .easing(TWEEN.Easing.Sinusoidal.InOut)
+      .easing(TWEEN.Easing.Back.Out)
       .onUpdate(->
-        it.path.setAttribute 'startOffset', @offset + offset
+        es = it.getEasing @p
+        currOffset = 415 + (@offset + offset)
+        # currOffset *= es
+        it.path.setAttribute 'startOffset', currOffset
+
         if @p is 1
           offset += @offset
-      ).repeat(10).delay(1000).start()
+      ).repeat(@surpCnt).delay(3000).start()
+
+  getEasing:(process)->
+    @easing.getPointAtLength(@easingLength-(process*@easingLength)).y/100
 
   bind:(func, context) ->
     wrapper = ->
