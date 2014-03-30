@@ -15,11 +15,13 @@ class Main
     it = @
     offset = 0
     @tween = new TWEEN.Tween({ offset: 0, p:0 })
-      .to({ offset: 400, p: 1 }, 5000)
+      .to({ offset: 400, p: 1 }, 3000)
+      .easing(TWEEN.Easing.Sinusoidal.InOut)
       .onUpdate(->
-        it.path.setAttribute 'startOffset', @offset
-        console.log @p
-      ).start()
+        it.path.setAttribute 'startOffset', @offset + offset
+        if @p is 1
+          offset += @offset
+      ).repeat(10).delay(1000).start()
 
   bind:(func, context) ->
     wrapper = ->

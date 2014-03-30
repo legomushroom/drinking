@@ -29,10 +29,12 @@
       }).to({
         offset: 400,
         p: 1
-      }, 5000).onUpdate(function() {
-        it.path.setAttribute('startOffset', this.offset);
-        return console.log(this.p);
-      }).start();
+      }, 3000).easing(TWEEN.Easing.Sinusoidal.InOut).onUpdate(function() {
+        it.path.setAttribute('startOffset', this.offset + offset);
+        if (this.p === 1) {
+          return offset += this.offset;
+        }
+      }).repeat(10).delay(1000).start();
     };
 
     Main.prototype.bind = function(func, context) {
