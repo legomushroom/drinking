@@ -25,8 +25,8 @@
       return this.tween = new TWEEN.Tween({
         offset: 0
       }).to({
-        offset: 2000
-      }, 30000).onUpdate(function() {
+        offset: 10000
+      }, 60000).onUpdate(function() {
         return it.path.setAttribute('startOffset', this.offset);
       }).start();
     };

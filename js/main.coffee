@@ -14,7 +14,7 @@ class Main
   launch:->
     it = @
     @tween = new TWEEN.Tween({ offset: 0 })
-      .to({ offset: 2000 }, 30000)
+      .to({ offset: 10000 }, 60000)
       .onUpdate(->
         it.path.setAttribute 'startOffset', @offset
       ).start()
