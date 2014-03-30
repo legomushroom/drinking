@@ -13,10 +13,12 @@ class Main
 
   launch:->
     it = @
-    @tween = new TWEEN.Tween({ offset: 0 })
-      .to({ offset: 10000 }, 60000)
+    offset = 0
+    @tween = new TWEEN.Tween({ offset: 0, p:0 })
+      .to({ offset: 400, p: 1 }, 5000)
       .onUpdate(->
         it.path.setAttribute 'startOffset', @offset
+        console.log @p
       ).start()
 
   bind:(func, context) ->

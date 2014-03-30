@@ -20,14 +20,18 @@
     };
 
     Main.prototype.launch = function() {
-      var it;
+      var it, offset;
       it = this;
+      offset = 0;
       return this.tween = new TWEEN.Tween({
-        offset: 0
+        offset: 0,
+        p: 0
       }).to({
-        offset: 10000
-      }, 60000).onUpdate(function() {
-        return it.path.setAttribute('startOffset', this.offset);
+        offset: 400,
+        p: 1
+      }, 5000).onUpdate(function() {
+        it.path.setAttribute('startOffset', this.offset);
+        return console.log(this.p);
       }).start();
     };
 
