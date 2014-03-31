@@ -15,8 +15,13 @@
       this.pathLength = this.realPath.getTotalLength();
       this.easing = document.getElementById('js-custom-easing');
       this.easingLength = this.easing.getTotalLength();
+      this.adamsApple = document.getElementById('js-adams-apple');
+      this.adamsLeft = document.getElementById('js-adams-left');
+      this.adamsRight = document.getElementById('js-adams-right');
       this.text = this.path.textContent;
-      return this.surpCnt = 3;
+      this.surpCnt = 2;
+      this.delay = 3000;
+      return this.duration = 5000;
     };
 
     Main.prototype.animate = function() {
@@ -29,13 +34,13 @@
       it = this;
       offset = 0;
       step = this.pathLength / this.surpCnt;
-      return this.tween = new TWEEN.Tween({
+      this.tween = new TWEEN.Tween({
         offset: 0,
         p: 0
       }).to({
         offset: -step,
         p: 1
-      }, 5000).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+      }, this.duration).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
         var currOffset, es;
         es = it.getEasing(this.p);
         currOffset = 415 + (this.offset + offset);
@@ -43,7 +48,29 @@
         if (this.p === 1) {
           return offset += this.offset;
         }
-      }).repeat(this.surpCnt).delay(3000).start();
+      }).start();
+      this.neck2 = new TWEEN.Tween({
+        y: -20,
+        angle: 1,
+        p: 0
+      }).to({
+        y: 0,
+        angle: 0,
+        p: 1
+      }, this.duration / 6).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+        return it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
+      });
+      return this.neck1 = new TWEEN.Tween({
+        y: 0,
+        angle: 0,
+        p: 0
+      }).to({
+        y: -20,
+        angle: 1,
+        p: 1
+      }, this.duration / 6).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+        return it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
+      }).chain(this.neck2).delay((this.delay / 2) + (this.duration / 5)).start();
     };
 
     Main.prototype.getEasing = function(process) {
