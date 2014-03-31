@@ -11,7 +11,7 @@ class Main
     @easing = document.getElementById 'js-custom-easing'
     @easingLength = @easing.getTotalLength()
     @text = @path.textContent
-    @surpCnt = 4
+    @surpCnt = 3
   animate:->
     requestAnimationFrame(@animate)
     TWEEN.update()

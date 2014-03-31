@@ -16,7 +16,7 @@
       this.easing = document.getElementById('js-custom-easing');
       this.easingLength = this.easing.getTotalLength();
       this.text = this.path.textContent;
-      return this.surpCnt = 4;
+      return this.surpCnt = 3;
     };
 
     Main.prototype.animate = function() {
