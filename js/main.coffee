@@ -16,7 +16,7 @@ class Main
     @surpCnt    = 2
     @delay      = 3000
     @duration   = 5000
-    @startOffset = 415
+    @startOffset = parseInt @path.getAttribute('startOffset'), 10
     @intervalCnt = 0
     @offset = @startOffset
   animate:->
@@ -24,7 +24,11 @@ class Main
     TWEEN.update()
 
   fixIEPosition:->
-    @isIE and @text.setAttribute 'transform', "translate(-2,1)"
+    if @isIE()
+      @text.setAttribute 'transform', "translate(-2,1)"
+      @startOffset = -800
+      @offset = @startOffset
+      @path.setAttribute 'startOffset', @startOffset
 
   launch:->
     if ++@intervalCnt > @surpCnt then clearInterval(@interlval)

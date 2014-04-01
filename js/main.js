@@ -21,7 +21,7 @@
       this.surpCnt = 2;
       this.delay = 3000;
       this.duration = 5000;
-      this.startOffset = 415;
+      this.startOffset = parseInt(this.path.getAttribute('startOffset'), 10);
       this.intervalCnt = 0;
       return this.offset = this.startOffset;
     };
@@ -32,7 +32,12 @@
     };
 
     Main.prototype.fixIEPosition = function() {
-      return this.isIE && this.text.setAttribute('transform', "translate(-2,1)");
+      if (this.isIE()) {
+        this.text.setAttribute('transform', "translate(-2,1)");
+        this.startOffset = -800;
+        this.offset = this.startOffset;
+        return this.path.setAttribute('startOffset', this.startOffset);
+      }
     };
 
     Main.prototype.launch = function() {
