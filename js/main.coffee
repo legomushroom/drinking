@@ -11,6 +11,7 @@ class Main
     @path       = document.getElementById 'js-words-path'
     @realPath   = document.getElementById 'words-path'
     @pathLength = @realPath.getTotalLength()
+    if @isFF() then @pathLength /= 1000000
     @adamsApple = document.getElementById 'js-adams-apple'
     @text = document.getElementById 'js-text'
     @surpCnt    = 2
@@ -24,11 +25,14 @@ class Main
     TWEEN.update()
 
   fixIEPosition:->
-    if @isIE()
+    if @isIE() or @isFF()
       @text.setAttribute 'transform', "translate(-2,1)"
-      @startOffset = -800
-      @offset = @startOffset
-      @path.setAttribute 'startOffset', @startOffset
+      @shortenOffset()
+
+  shortenOffset:->
+    @startOffset = -800
+    @offset = @startOffset
+    @path.setAttribute 'startOffset', @startOffset
 
   launch:->
     if ++@intervalCnt > @surpCnt then clearInterval(@interlval)
@@ -41,11 +45,12 @@ class Main
       .onUpdate(->
         it.path.setAttribute 'startOffset',  @offset
         it.offset = @offset
-      ).onComplete(->
+      )
+      .onComplete(->
         it.tween2 = new TWEEN.Tween({ offsetReverse: it.offset, p:0 })
           .to({ offsetReverse: it.offset+100, p: 1 }, it.duration)
           .easing(TWEEN.Easing.Elastic.Out)
-          .onUpdate(-> 
+          .onUpdate(->
             it.path.setAttribute 'startOffset', @offsetReverse
             it.offset = @offsetReverse
           ).start()
@@ -85,6 +90,9 @@ class Main
       rv = parseInt(ua.substring(rvNum + 3, ua.indexOf(".", rvNum)), 10)
     @isIECache = (if (rv > -1) then rv else undef)
     @isIECache
+
+  isFF:->
+    navigator.userAgent.toLowerCase().indexOf('firefox') > -1
 
   bind:(func, context) ->
     wrapper = ->

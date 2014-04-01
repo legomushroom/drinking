@@ -16,6 +16,9 @@
       this.path = document.getElementById('js-words-path');
       this.realPath = document.getElementById('words-path');
       this.pathLength = this.realPath.getTotalLength();
+      if (this.isFF()) {
+        this.pathLength /= 1000000;
+      }
       this.adamsApple = document.getElementById('js-adams-apple');
       this.text = document.getElementById('js-text');
       this.surpCnt = 2;
@@ -32,12 +35,16 @@
     };
 
     Main.prototype.fixIEPosition = function() {
-      if (this.isIE()) {
+      if (this.isIE() || this.isFF()) {
         this.text.setAttribute('transform', "translate(-2,1)");
-        this.startOffset = -800;
-        this.offset = this.startOffset;
-        return this.path.setAttribute('startOffset', this.startOffset);
+        return this.shortenOffset();
       }
+    };
+
+    Main.prototype.shortenOffset = function() {
+      this.startOffset = -800;
+      this.offset = this.startOffset;
+      return this.path.setAttribute('startOffset', this.startOffset);
     };
 
     Main.prototype.launch = function() {
@@ -117,6 +124,10 @@
       }
       this.isIECache = (rv > -1 ? rv : undef);
       return this.isIECache;
+    };
+
+    Main.prototype.isFF = function() {
+      return navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
     };
 
     Main.prototype.bind = function(func, context) {
