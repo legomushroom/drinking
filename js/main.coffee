@@ -2,70 +2,64 @@ class Main
   constructor:->
     @vars()
     @animate()
+    @interval = setInterval @launch, 2*@duration
     @launch()
   vars:->
-    @animate = @bind @animate, @
+    @animate  = @bind @animate, @
+    @launch   = @bind @launch, @
     @path       = document.getElementById 'js-words-path'
     @realPath   = document.getElementById 'words-path'
     @pathLength = @realPath.getTotalLength()
-    @easing     = document.getElementById 'js-custom-easing'
-    @easingLength = @easing.getTotalLength()
     @adamsApple = document.getElementById 'js-adams-apple'
     @adamsLeft  = document.getElementById 'js-adams-left'
     @adamsRight = document.getElementById 'js-adams-right'
     @text = @path.textContent
-    @surpCnt    = 2
+    @surpCnt    = 3
     @delay      = 3000
     @duration   = 5000
+    @startOffset = 415
+    @intervalCnt = 0
+    @offset = @startOffset
   animate:->
     requestAnimationFrame(@animate)
     TWEEN.update()
 
   launch:->
+    if ++@intervalCnt > @surpCnt then clearInterval(@interlval)
     it = @
-    offset = 0
     step = @pathLength/@surpCnt
-    @tween = new TWEEN.Tween({ offset: 0, p:0 })
-      .to({ offset: -step, p: 1 }, @duration)
+    @tween1 = new TWEEN.Tween({ offset: it.offset, p:0 })
+      .to({ offset: it.offset-step, p: 1 }, @duration)
       # .easing(TWEEN.Easing.Sinusoidal.InOut)
-      .easing(TWEEN.Easing.Back.Out)
+      .easing(TWEEN.Easing.Sinusoidal.Out)
       .onUpdate(->
-        es = it.getEasing @p
-        currOffset = 415 + (@offset + offset)
-        # currOffset *= es
-        it.path.setAttribute 'startOffset', currOffset
+        it.path.setAttribute 'startOffset',  @offset
+        it.offset = @offset
+      ).onComplete(->
+        it.tween2 = new TWEEN.Tween({ offsetReverse: it.offset, p:0 })
+          .to({ offsetReverse: it.offset+100, p: 1 }, it.duration)
+          .easing(TWEEN.Easing.Elastic.Out)
+          .onUpdate(-> 
+            it.path.setAttribute 'startOffset', @offsetReverse
+            it.offset = @offsetReverse
+          ).start()
+      ).onStart(->it.gulp())
+      .start()
 
-        if @p is 1
-          offset += @offset
-      ).start()
-      # ).repeat(@surpCnt).delay(@delay).start()
-      # 
-    
-    @neck2 = new TWEEN.Tween({ y: -20, angle: 1, p:0 })
+  gulp:->
+    it = @
+    @neck2 = new TWEEN.Tween({ y: -15, angle: 1, p:0 })
       .to({ y:0, angle: 0, p: 1 }, @duration/6)
-      # .easing(TWEEN.Easing.Sinusoidal.InOut)
       .easing(TWEEN.Easing.Back.Out)
       .onUpdate(->
         it.adamsApple.setAttribute  'transform', "translate(0, #{@y})"
-        # it.adamsLeft.setAttribute   'transform', "rotate(#{@angle},337,565)"
-        # it.adamsRight.setAttribute    'transform', "rotate(#{-@angle},367,565)"
-      # ).repeat(@surpCnt).delay(@delay+(@duration/2)).start()
       )
-
     @neck1 = new TWEEN.Tween({ y: 0, angle:0, p:0 })
-      .to({ y:-20, angle:1, p: 1 }, @duration/6)
-      # .easing(TWEEN.Easing.Sinusoidal.InOut)
+      .to({ y:-15, angle:1, p: 1 }, @duration/8)
       .easing(TWEEN.Easing.Back.Out)
       .onUpdate(->
         it.adamsApple.setAttribute    'transform', "translate(0, #{@y})"
-        # it.adamsLeft.setAttribute     'transform', "rotate(#{@angle},337,565)"
-        # it.adamsRight.setAttribute    'transform', "rotate(#{-@angle},367,565)"
-      # ).repeat(@surpCnt).delay(@delay+(@duration/2)).start()
-      ).chain(@neck2).delay((@delay/2)+(@duration/5)).start()
-
-
-  getEasing:(process)->
-    @easing.getPointAtLength(@easingLength-(process*@easingLength)).y/100
+      ).chain(@neck2).delay(@duration-(@duration/10)).start()
 
   bind:(func, context) ->
     wrapper = ->
