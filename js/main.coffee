@@ -1,6 +1,7 @@
 class Main
   constructor:->
     @vars()
+    @fixIEPosition()
     @animate()
     @interval = setInterval @launch, 2*@duration
     @launch()
@@ -11,10 +12,8 @@ class Main
     @realPath   = document.getElementById 'words-path'
     @pathLength = @realPath.getTotalLength()
     @adamsApple = document.getElementById 'js-adams-apple'
-    @adamsLeft  = document.getElementById 'js-adams-left'
-    @adamsRight = document.getElementById 'js-adams-right'
-    @text = @path.textContent
-    @surpCnt    = 3
+    @text = document.getElementById 'js-text'
+    @surpCnt    = 2
     @delay      = 3000
     @duration   = 5000
     @startOffset = 415
@@ -23,6 +22,9 @@ class Main
   animate:->
     requestAnimationFrame(@animate)
     TWEEN.update()
+
+  fixIEPosition:->
+    @isIE and @text.setAttribute 'transform', "translate(-2,1)"
 
   launch:->
     if ++@intervalCnt > @surpCnt then clearInterval(@interlval)
@@ -60,6 +62,25 @@ class Main
       .onUpdate(->
         it.adamsApple.setAttribute    'transform', "translate(0, #{@y})"
       ).chain(@neck2).delay(@duration-(@duration/10)).start()
+
+  isIE:->
+    if @isIECache then return @isIECache
+    undef = undefined # Return value assumes failure.
+    rv = -1
+    ua = window.navigator.userAgent
+    msie = ua.indexOf("MSIE ")
+    trident = ua.indexOf("Trident/")
+    if msie > 0
+      
+      # IE 10 or older => return version number
+      rv = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10)
+    else if trident > 0
+      
+      # IE 11 (or newer) => return version number
+      rvNum = ua.indexOf("rv:")
+      rv = parseInt(ua.substring(rvNum + 3, ua.indexOf(".", rvNum)), 10)
+    @isIECache = (if (rv > -1) then rv else undef)
+    @isIECache
 
   bind:(func, context) ->
     wrapper = ->

@@ -4,6 +4,7 @@
   Main = (function() {
     function Main() {
       this.vars();
+      this.fixIEPosition();
       this.animate();
       this.interval = setInterval(this.launch, 2 * this.duration);
       this.launch();
@@ -16,10 +17,8 @@
       this.realPath = document.getElementById('words-path');
       this.pathLength = this.realPath.getTotalLength();
       this.adamsApple = document.getElementById('js-adams-apple');
-      this.adamsLeft = document.getElementById('js-adams-left');
-      this.adamsRight = document.getElementById('js-adams-right');
-      this.text = this.path.textContent;
-      this.surpCnt = 3;
+      this.text = document.getElementById('js-text');
+      this.surpCnt = 2;
       this.delay = 3000;
       this.duration = 5000;
       this.startOffset = 415;
@@ -30,6 +29,10 @@
     Main.prototype.animate = function() {
       requestAnimationFrame(this.animate);
       return TWEEN.update();
+    };
+
+    Main.prototype.fixIEPosition = function() {
+      return this.isIE && this.text.setAttribute('transform', "translate(-2,1)");
     };
 
     Main.prototype.launch = function() {
@@ -89,6 +92,26 @@
       }, this.duration / 8).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
         return it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
       }).chain(this.neck2).delay(this.duration - (this.duration / 10)).start();
+    };
+
+    Main.prototype.isIE = function() {
+      var msie, rv, rvNum, trident, ua, undef;
+      if (this.isIECache) {
+        return this.isIECache;
+      }
+      undef = void 0;
+      rv = -1;
+      ua = window.navigator.userAgent;
+      msie = ua.indexOf("MSIE ");
+      trident = ua.indexOf("Trident/");
+      if (msie > 0) {
+        rv = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+      } else if (trident > 0) {
+        rvNum = ua.indexOf("rv:");
+        rv = parseInt(ua.substring(rvNum + 3, ua.indexOf(".", rvNum)), 10);
+      }
+      this.isIECache = (rv > -1 ? rv : undef);
+      return this.isIECache;
     };
 
     Main.prototype.bind = function(func, context) {
