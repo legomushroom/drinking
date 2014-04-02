@@ -68,7 +68,7 @@
           offsetReverse: it.offset,
           p: 0
         }).to({
-          offsetReverse: it.offset + 100,
+          offsetReverse: it.offset + 50,
           p: 1
         }, it.duration).easing(TWEEN.Easing.Elastic.Out).onUpdate(function() {
           it.path.setAttribute('startOffset', this.offsetReverse);
@@ -90,7 +90,7 @@
         y: 0,
         angle: 0,
         p: 1
-      }, this.duration / 6).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+      }, this.duration / 8).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
         return it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
       });
       return this.neck1 = new TWEEN.Tween({
@@ -101,7 +101,7 @@
         y: -15,
         angle: 1,
         p: 1
-      }, this.duration / 8).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+      }, this.duration / 10).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
         return it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
       }).chain(this.neck2).delay(this.duration - (this.duration / 10)).start();
     };

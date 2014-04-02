@@ -48,7 +48,7 @@ class Main
       )
       .onComplete(->
         it.tween2 = new TWEEN.Tween({ offsetReverse: it.offset, p:0 })
-          .to({ offsetReverse: it.offset+100, p: 1 }, it.duration)
+          .to({ offsetReverse: it.offset+50, p: 1 }, it.duration)
           .easing(TWEEN.Easing.Elastic.Out)
           .onUpdate(->
             it.path.setAttribute 'startOffset', @offsetReverse
@@ -60,13 +60,13 @@ class Main
   gulp:->
     it = @
     @neck2 = new TWEEN.Tween({ y: -15, angle: 1, p:0 })
-      .to({ y:0, angle: 0, p: 1 }, @duration/6)
+      .to({ y:0, angle: 0, p: 1 }, @duration/8)
       .easing(TWEEN.Easing.Back.Out)
       .onUpdate(->
         it.adamsApple.setAttribute  'transform', "translate(0, #{@y})"
       )
     @neck1 = new TWEEN.Tween({ y: 0, angle:0, p:0 })
-      .to({ y:-15, angle:1, p: 1 }, @duration/8)
+      .to({ y:-15, angle:1, p: 1 }, @duration/10)
       .easing(TWEEN.Easing.Back.Out)
       .onUpdate(->
         it.adamsApple.setAttribute    'transform', "translate(0, #{@y})"
