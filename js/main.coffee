@@ -3,8 +3,19 @@ class Main
     @vars()
     @fixIEPosition()
     @animate()
+    @setInterval()
+
+  setInterval:->
     @interval = setInterval @launch, 2*@duration
     @launch()
+
+  reset:->
+    @offset       = @startOffset
+    @path.setAttribute 'startOffset', @startOffset
+    @intervalCnt  = 0
+    clearInterval @interval
+    @setInterval()
+
   vars:->
     @animate  = @bind @animate, @
     @launch   = @bind @launch, @
@@ -35,7 +46,8 @@ class Main
     @path.setAttribute 'startOffset', @startOffset
 
   launch:->
-    if ++@intervalCnt > @surpCnt then clearInterval(@interlval)
+    if ++@intervalCnt > (2*@surpCnt)+1
+      @reset()
     it = @
     step = @pathLength/@surpCnt
     @tween1 = new TWEEN.Tween({ offset: it.offset, p:0 })
@@ -93,6 +105,7 @@ class Main
 
   isFF:->
     navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+
 
   bind:(func, context) ->
     wrapper = ->

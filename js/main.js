@@ -6,9 +6,21 @@
       this.vars();
       this.fixIEPosition();
       this.animate();
-      this.interval = setInterval(this.launch, 2 * this.duration);
-      this.launch();
+      this.setInterval();
     }
+
+    Main.prototype.setInterval = function() {
+      this.interval = setInterval(this.launch, 2 * this.duration);
+      return this.launch();
+    };
+
+    Main.prototype.reset = function() {
+      this.offset = this.startOffset;
+      this.path.setAttribute('startOffset', this.startOffset);
+      this.intervalCnt = 0;
+      clearInterval(this.interval);
+      return this.setInterval();
+    };
 
     Main.prototype.vars = function() {
       this.animate = this.bind(this.animate, this);
@@ -49,8 +61,8 @@
 
     Main.prototype.launch = function() {
       var it, step;
-      if (++this.intervalCnt > this.surpCnt) {
-        clearInterval(this.interlval);
+      if (++this.intervalCnt > (2 * this.surpCnt) + 1) {
+        this.reset();
       }
       it = this;
       step = this.pathLength / this.surpCnt;
