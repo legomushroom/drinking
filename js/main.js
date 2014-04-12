@@ -27,8 +27,6 @@
       this.launch = this.bind(this.launch, this);
       this.path = document.getElementById('js-words-path');
       this.realPath = document.getElementById('words-path');
-      this.topLip = document.getElementById('js-top-lip');
-      this.bottomLip = document.getElementById('js-bottom-lip');
       this.pathLength = this.realPath.getTotalLength();
       if (this.isFF()) {
         this.pathLength /= 1000000;
@@ -89,27 +87,7 @@
           return it.offset = this.offsetReverse;
         }).start();
       }).onStart(function() {
-        it.gulp();
-        return it.lips();
-      }).start();
-    };
-
-    Main.prototype.lips = function() {
-      var it;
-      it = this;
-      this.lip1 = new TWEEN.Tween({
-        y: 0
-      }).to({
-        y: -2
-      }, this.duration).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
-        return it.bottomLip.setAttribute('transform', "translate(0, " + this.y + ")");
-      }).start();
-      return this.lip2 = new TWEEN.Tween({
-        y: 0
-      }).to({
-        y: 2
-      }, this.duration).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
-        return it.topLip.setAttribute('transform', "translate(0, " + this.y + ")");
+        return it.gulp();
       }).start();
     };
 
@@ -118,25 +96,23 @@
       it = this;
       this.neck2 = new TWEEN.Tween({
         y: -15,
-        angle: 1,
-        p: 0
+        p: 1
       }).to({
         y: 0,
-        angle: 0,
-        p: 1
+        p: 0
       }, this.duration / 8).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
-        return it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
+        it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
+        return it.adamsApple.setAttribute('opacity', this.p);
       });
       return this.neck1 = new TWEEN.Tween({
         y: 0,
-        angle: 0,
         p: 0
       }).to({
         y: -15,
-        angle: 1,
         p: 1
       }, this.duration / 10).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
-        return it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
+        it.adamsApple.setAttribute('transform', "translate(0, " + this.y + ")");
+        return it.adamsApple.setAttribute('opacity', this.p);
       }).chain(this.neck2).delay(this.duration - (this.duration / 10)).start();
     };
 

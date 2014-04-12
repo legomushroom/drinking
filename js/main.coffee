@@ -21,8 +21,6 @@ class Main
     @launch   = @bind @launch, @
     @path       = document.getElementById 'js-words-path'
     @realPath   = document.getElementById 'words-path'
-    @topLip     = document.getElementById 'js-top-lip'
-    @bottomLip  = document.getElementById 'js-bottom-lip'
     @pathLength = @realPath.getTotalLength()
     if @isFF() then @pathLength /= 1000000
     @adamsApple = document.getElementById 'js-adams-apple'
@@ -68,40 +66,24 @@ class Main
             it.path.setAttribute 'startOffset', @offsetReverse
             it.offset = @offsetReverse
           ).start()
-      ).onStart(->it.gulp(); it.lips())
+      ).onStart(->it.gulp())
       .start()
-
-  lips:->
-    it = @
-    
-    @lip1 = new TWEEN.Tween({ y: 0 })
-      .to({ y: -2 }, @duration)
-      .easing(TWEEN.Easing.Back.Out)
-      .onUpdate(->
-        it.bottomLip.setAttribute    'transform', "translate(0, #{@y})"
-      ).start()
-
-    @lip2 = new TWEEN.Tween({ y: 0 })
-      .to({ y: 2 }, @duration)
-      .easing(TWEEN.Easing.Back.Out)
-      .onUpdate(->
-        it.topLip.setAttribute    'transform', "translate(0, #{@y})"
-      ).start()
-
 
   gulp:->
     it = @
-    @neck2 = new TWEEN.Tween({ y: -15, angle: 1, p:0 })
-      .to({ y:0, angle: 0, p: 1 }, @duration/8)
+    @neck2 = new TWEEN.Tween({ y: -15, p:1 })
+      .to({ y:0, p: 0 }, @duration/8)
       .easing(TWEEN.Easing.Back.Out)
       .onUpdate(->
         it.adamsApple.setAttribute  'transform', "translate(0, #{@y})"
+        it.adamsApple.setAttribute    'opacity', @p
       )
-    @neck1 = new TWEEN.Tween({ y: 0, angle:0, p:0 })
-      .to({ y:-15, angle:1, p: 1 }, @duration/10)
+    @neck1 = new TWEEN.Tween({ y: 0, p:0 })
+      .to({ y:-15, p: 1 }, @duration/10)
       .easing(TWEEN.Easing.Back.Out)
       .onUpdate(->
         it.adamsApple.setAttribute    'transform', "translate(0, #{@y})"
+        it.adamsApple.setAttribute    'opacity', @p
       ).chain(@neck2).delay(@duration-(@duration/10)).start()
 
   isIE:->

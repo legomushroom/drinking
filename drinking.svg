@@ -1,6 +1,6 @@
 
 <svg version="1.1" id="Layer_1"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 
 	 viewBox="0 0 774 900" enable-background="new 0 0 774 900" xml:space="preserve">
 
 <g>
@@ -1369,7 +1369,10 @@
 <path fill="#BF6D91" d="M567.828,876.331c0-6.626,30.719-11.394,57.357-11.394c26.634,0,52.415,5.073,52.415,11.7
 	c0,6.625-25.775,12.317-52.415,12.317S567.828,882.964,567.828,876.331z"/>
 
-
+<text id="js-text">
+	<textPath alignment-baseline="ideographic" class="water-text" id="js-words-path" xlink:href="#words-path" startOffset="415">youth wonder felicity awesomeness yummy elixir cuteness dance fancy brood emollient fetching love imbue inglenook leisure sweet opulent gambol epiphany youth wonder felicity awesomeness yummy elixir cuteness dance fancy brood emollient fetching love imbue inglenook leisure sweet opulent gambol epiphany youth wonder felicity awesomeness yummy elixir cuteness dance fancy brood emollient fetching love imbue inglenook leisure sweet opulent gambol epiphany youth wonder felicity awesomeness yummy elixir cuteness dance fancy brood emollient fetching love imbue inglenook leisure sweet opulent gambol epiphany youth wonder
+	</textPath>
+</text>
 	<!-- 
 <path id="js-custom-easing" fill="none" d="M0.6,0c0,0,53.799,193.601,85.2,139.4c3.545-6.12,7.9-36.401,18.5-19.4
 	c3.439,5.515,6.526,0.737,9.325-1.163c2.087-1.416,4.933,3.759,6.975,1.163"/> -->
@@ -1938,7 +1941,7 @@
 	c-0.034-2.625,0.074-5.243-0.312-7.825c-0.47-1.874-1.022-3.743-1.562-5.568C123.75,872.841,123.115,875.351,122.657,877.908z"/>
 <path fill="#F092B1" d="M284.227,380.171c-0.032,0.069-0.069,0.133-0.101,0.199l0.129,0.053
 	C284.245,380.341,284.238,380.255,284.227,380.171z"/>
-<g id="js-adams-apple">
+<g id="js-adams-apple" opacity="0">
 	<path fill="none" stroke="#D26691" stroke-width="2" stroke-miterlimit="10" d="M430.285,580.768
 		c-7.2,12.377,4.899,18.423,4.899,18.423"/>
 	<path fill="none" stroke="#D26691" stroke-width="2" stroke-miterlimit="10" d="M448.923,579.886
