@@ -46,7 +46,7 @@ class Main
     @path.setAttribute 'startOffset', @startOffset
 
   launch:->
-    if ++@intervalCnt > (2*@surpCnt)+1
+    if ++@intervalCnt > (2*@surpCnt)-1
       @reset()
     it = @
     step = @pathLength/@surpCnt

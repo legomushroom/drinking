@@ -61,7 +61,7 @@
 
     Main.prototype.launch = function() {
       var it, step;
-      if (++this.intervalCnt > (2 * this.surpCnt) + 1) {
+      if (++this.intervalCnt > (2 * this.surpCnt) - 1) {
         this.reset();
       }
       it = this;
