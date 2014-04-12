@@ -27,6 +27,8 @@
       this.launch = this.bind(this.launch, this);
       this.path = document.getElementById('js-words-path');
       this.realPath = document.getElementById('words-path');
+      this.topLip = document.getElementById('js-top-lip');
+      this.bottomLip = document.getElementById('js-bottom-lip');
       this.pathLength = this.realPath.getTotalLength();
       if (this.isFF()) {
         this.pathLength /= 1000000;
@@ -87,7 +89,27 @@
           return it.offset = this.offsetReverse;
         }).start();
       }).onStart(function() {
-        return it.gulp();
+        it.gulp();
+        return it.lips();
+      }).start();
+    };
+
+    Main.prototype.lips = function() {
+      var it;
+      it = this;
+      this.lip1 = new TWEEN.Tween({
+        y: 0
+      }).to({
+        y: -2
+      }, this.duration).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+        return it.bottomLip.setAttribute('transform', "translate(0, " + this.y + ")");
+      }).start();
+      return this.lip2 = new TWEEN.Tween({
+        y: 0
+      }).to({
+        y: 2
+      }, this.duration).easing(TWEEN.Easing.Back.Out).onUpdate(function() {
+        return it.topLip.setAttribute('transform', "translate(0, " + this.y + ")");
       }).start();
     };
 
