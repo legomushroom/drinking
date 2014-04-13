@@ -38,7 +38,8 @@
       this.duration = 5000;
       this.startOffset = parseInt(this.path.getAttribute('startOffset'), 10);
       this.intervalCnt = 0;
-      return this.offset = this.startOffset;
+      this.offset = this.startOffset;
+      return this.gulpsCnt = this.isIE() || this.isFF() ? 2 : (2 * this.surpCnt) - 1;
     };
 
     Main.prototype.animate = function() {
@@ -61,7 +62,7 @@
 
     Main.prototype.launch = function() {
       var it, step;
-      if (++this.intervalCnt > (2 * this.surpCnt) - 1) {
+      if (++this.intervalCnt > this.gulpsCnt) {
         this.reset();
       }
       it = this;

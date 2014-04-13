@@ -31,6 +31,7 @@ class Main
     @startOffset = parseInt @path.getAttribute('startOffset'), 10
     @intervalCnt = 0
     @offset = @startOffset
+    @gulpsCnt = if @isIE() or @isFF() then 2 else (2*@surpCnt)-1
   animate:->
     requestAnimationFrame(@animate)
     TWEEN.update()
@@ -46,7 +47,7 @@ class Main
     @path.setAttribute 'startOffset', @startOffset
 
   launch:->
-    if ++@intervalCnt > (2*@surpCnt)-1
+    if ++@intervalCnt > @gulpsCnt
       @reset()
     it = @
     step = @pathLength/@surpCnt
