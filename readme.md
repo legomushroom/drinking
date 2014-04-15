@@ -1,4 +1,4 @@
-Use case example for [advanced animation path](http://blog.legomushroom.com/2014/03/defining-advanced-animation-path/)
+Use case example for [text animation](http://blog.legomushroom.com/2014/04/text-animation-path/)
 blog post.
 
 ---------------------
@@ -26,3 +26,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
